@@ -114,7 +114,8 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
         
         // セル内のボタンのアクションをソースコードで設定する
         cell.likeButton.addTarget(self, action:#selector(handleButton(sender:event:)), for:  UIControlEvents.touchUpInside)
-        
+        cell.commentButton.addTarget(self, action:#selector(commentInput(sender:event:)), for:  UIControlEvents.touchUpInside)
+
         return cell
     }
     
@@ -165,6 +166,24 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
         }
     }
 
+    // セル内のコメントボタンがタップされた時に呼ばれるメソッド
+    @objc func commentInput(sender: UIButton, event:UIEvent) {
+        print("DEBUG_PRINT: コメントボタンがタップされました。")
+        
+        // 配列からタップされたインデックスのデータを取り出す
+        let touch = event.allTouches?.first
+        let point = touch!.location(in: self.tableView)
+        let indexPath = tableView.indexPathForRow(at: point)
+        let postData = postArray[indexPath!.row]
+
+        //画面遷移させ、データを渡す
+        let storyboard: UIStoryboard = self.storyboard!
+        let commentView = storyboard.instantiateViewController(withIdentifier:"Comment") as! CommentViewController
+        commentView.postData = postData//渡すデータを追加
+        self.present(commentView, animated: true, completion: nil)
+            
+        }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

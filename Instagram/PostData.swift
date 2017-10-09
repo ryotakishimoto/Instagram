@@ -19,6 +19,7 @@ class PostData: NSObject {
     var date: NSDate?
     var likes: [String] = []
     var isLiked: Bool = false
+    var comments: [String] = []//コメントを追加した、配列[]として定義すること
     
     init(snapshot: DataSnapshot, myId: String) {
         self.id = snapshot.key
@@ -31,6 +32,11 @@ class PostData: NSObject {
         self.name = valueDictionary["name"] as? String
         
         self.caption = valueDictionary["caption"] as? String
+        
+        if let comments = valueDictionary["comments"] as? [String] {
+            self.comments = comments
+        } //コメントを追加した、likesと同じようにしておく
+
         
         let time = valueDictionary["time"] as? String
         self.date = NSDate(timeIntervalSinceReferenceDate: TimeInterval(time!)!)
