@@ -35,7 +35,7 @@ class PostData: NSObject {
         
         if let comments = valueDictionary["comments"] as? [String] {
             self.comments = comments
-        } //コメントを追加した、likesと同じようにしておく
+        } //コメントを追加した、likesと同じようにしておく。なんで「self〜」が必要？
 
         
         let time = valueDictionary["time"] as? String

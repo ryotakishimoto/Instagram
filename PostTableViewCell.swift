@@ -51,11 +51,11 @@ class PostTableViewCell: UITableViewCell {
             self.likeButton.setImage(buttonImage, for: UIControlState.normal)
         }
         
-        var commentString =  ""
+        var commentString =  ""//追加される変数を用意しておく
         for comment in postData.comments{
         commentString += "\(comment)\n"
-        }
-        self.commentLabel.text = "\(commentString)"
+        }//commentにpostDataから一つずつコメントを取り出し、改行ともにcommetに追加する
+        self.commentLabel.text = "\(commentString)"//全部追加したものを表示する
 
     }
     
